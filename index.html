@@ -744,7 +744,15 @@ function onYouTubeIframeAPIReady() {
 }
 
 window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+document.addEventListener("click", function enterFS() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch(() => {});
+    document.body.classList.add("fullscreen-mode");
+  }
+  document.removeEventListener("click", enterFS);
+}, { once: true });
 </script>
 </body>
 </html>
+
 
