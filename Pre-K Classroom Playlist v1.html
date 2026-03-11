@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>PreK Classroom Playlist</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f5f5f5;
+margin:0;
+}
+
+.container{
+display:flex;
+height:100vh;
+}
+
+.sidebar{
+width:350px;
+background:white;
+overflow-y:auto;
+padding:20px;
+}
+
+.track{
+padding:15px;
+margin:10px 0;
+background:#f2f2f2;
+border-radius:12px;
+cursor:pointer;
+font-size:20px;
+}
+
+.track:hover{
+background:#ffe4b5;
+}
+
+.player{
+flex:1;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+}
+
+iframe{
+width:90%;
+height:60vh;
+border:none;
+border-radius:15px;
+}
+
+.controls{
+margin-top:20px;
+}
+
+button{
+font-size:24px;
+padding:15px 30px;
+margin:10px;
+border:none;
+border-radius:15px;
+background:#ff9800;
+color:white;
+cursor:pointer;
+}
+
+button:hover{
+background:#ff7300;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="sidebar" id="playlist"></div>
+
+<div class="player">
+
+<iframe id="player" src="https://www.youtube.com/embed/fHlA_bCLyEY?enablejsapi=1"></iframe>
+
+<div class="controls">
+<button onclick="prev()">Previous</button>
+<button onclick="next()">Next</button>
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const tracks = [
+
+{title:"Yoga Song",id:"fHlA_bCLyEY"},
+{title:"Come On Everybody",id:"8pFNu-2IK0M"},
+{title:"The Hawaiian Colors Song",id:"yRFsYEH7ZUc"},
+{title:"The Goldfish",id:"uCF3vBuxXS8"},
+{title:"Side to Side",id:"w4Jnh1A6_KU"},
+{title:"Be My Echo",id:"8L7ZE4zjoio"},
+{title:"Dance Freeze Melt",id:"9J303yV8rKM"},
+{title:"Animal Floor is Lava",id:"RQX9etLLYyY"},
+{title:"Clap Your Hands",id:"oYCPhb56pWY"},
+{title:"Tap Clap Bump Jump",id:"OqP0by8oDog"},
+{title:"Sweater",id:"zJ5brXStGOY"},
+{title:"We Are the Dinosaurs",id:"vPrmY7labLA"},
+{title:"All the Fish",id:"gLNvuZ5KCgs"},
+{title:"Shake It Like a Duck",id:"QhUnVJvU-v0"},
+{title:"Slippery Fish",id:"PPwS4_qzeWA"},
+{title:"Icky Sticky Bubble Gum",id:"U-wrtk1P11I"},
+{title:"Down by the Bay",id:"DWKVKfk6e40"},
+{title:"Skinnamarink",id:"kFFD_r-0DsA"},
+{title:"ABCs",id:"y6chG9t1tDk"},
+{title:"Wheels on the Bus",id:"dQzsGeEUDVI"},
+{title:"Mr Sun",id:"523G0WZNWic"},
+{title:"Octopus Slippery Fish",id:"yBHFqdIts1Y"}
+
+]
+
+let current=0
+const player=document.getElementById("player")
+const playlist=document.getElementById("playlist")
+
+tracks.forEach((t,i)=>{
+
+const div=document.createElement("div")
+div.className="track"
+div.innerText=(i+1)+". "+t.title
+
+div.onclick=()=>{
+current=i
+load()
+}
+
+playlist.appendChild(div)
+
+})
+
+function load(){
+
+player.src="https://www.youtube.com/embed/"+tracks[current].id+"?autoplay=1"
+
+}
+
+function next(){
+
+current=(current+1)%tracks.length
+load()
+
+}
+
+function prev(){
+
+current=(current-1+tracks.length)%tracks.length
+load()
+
+}
+
+</script>
+
+</body>
+</html>
